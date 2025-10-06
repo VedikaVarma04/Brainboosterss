@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PRE - SAT EXAM</title>
+
+  <!-- style -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Supabase (UMD) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+
+      <header class="card-header">
+        <h1>PRE - SAT EXAM</h1>
+        <p id="welcomeSmall">Welcome — please login or register</p>
+      </header>
+
+      <main class="card-body">
+        <!-- LEFT: auth / profile / nav -->
+        <section class="left-col">
+
+          <!-- LOGIN / REGISTER -->
+          <div id="authBox">
+            <div class="tabs">
+              <button id="tabLogin" class="tab active">Login</button>
+              <button id="tabRegister" class="tab">Register</button>
+            </div>
+
+            <!-- Login form -->
+            <form id="loginForm" class="form">
+              <input id="loginEmail" type="email" placeholder="Email" required>
+              <input id="loginPassword" type="password" placeholder="Password" required>
+              <button id="btnLogin" class="btn primary">Log in</button>
+            </form>
+
+            <!-- Register form -->
+            <form id="registerForm" class="form hidden">
+              <input id="regName" type="text" placeholder="Full name" required>
+              <input id="regEmail" type="email" placeholder="Email" required>
+              <input id="regPassword" type="password" placeholder="Password (min 6 chars)" required>
+              <div class="avatar-picks">
+                <small>Pick an avatar:</small>
+                <div id="avatarList" class="avatars"></div>
+              </div>
+              <button id="btnRegister" class="btn primary">Register</button>
+            </form>
+          </div>
+
+          <!-- AFTER LOGIN: profile + nav -->
+          <div id="profileBox" class="hidden">
+            <div class="profile">
+              <img id="profileAvatar" src="" alt="avatar" class="avatar-lg">
+              <div>
+                <div id="profileName" class="profile-name">User Name</div>
+                <div class="profile-actions">
+                  <button id="btnLogout" class="btn secondary">Logout</button>
+                </div>
+              </div>
+            </div>
+
+            <nav class="nav">
+              <button id="btnTakeTest" class="nav-btn">Take Test</button>
+              <button id="btnDashboard" class="nav-btn">Dashboard</button>
+              <button id="btnHistory" class="nav-btn">History</button>
+            </nav>
+
+            <div class="quoteBox">
+              <strong>Motivation</strong>
+              <p id="quoteText">Practice makes progress — try one test now!</p>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- RIGHT: content area -->
+        <section class="right-col">
+          <!-- Dashboard -->
+          <div id="dashboard" class="panel hidden">
+            <div class="statsRow">
+              <div class="statCard">
+                <div class="statTitle">Total Tests</div>
+                <div id="statTotalTests" class="statValue">0</div>
+              </div>
+              <div class="statCard">
+                <div class="statTitle">Avg Score</div>
+                <div id="statAvgScore" class="statValue">0</div>
+              </div>
+              <div class="statCard">
+                <div class="statTitle">Avg Time / Q (s)</div>
+                <div id="statAvgTime" class="statValue">0</div>
+              </div>
+              <div class="statCard">
+                <div class="statTitle">Chance to Pass</div>
+                <div id="statPassChance" class="statValue">0%</div>
+              </div>
+            </div>
+
+            <div class="chartRow">
+              <canvas id="scoresChart" height="160"></canvas>
+            </div>
+
+            <div class="historyRow">
+              <h4>Recent Attempts</h4>
+              <ul id="recentList" class="historyList"></ul>
+            </div>
+          </div>
+
+          <!-- Test chooser -->
+          <div id="testChooser" class="panel hidden">
+            <h3>Choose Subject & Level</h3>
+            <div class="subjectGrid">
+              <div class="subjectCard">
+                <h4>Maths</h4>
+                <div class="levelBtns">
+                  <button class="btn small" onclick="startTest('Maths','Intermediate level')">Intermediate</button>
+                  <button class="btn small" onclick="startTest('Maths','Hard level')">Hard</button>
+                  <button class="btn small" onclick="startTest('Maths','Easy level')">Easy</button>
+                </div>
+              </div>
+              <div class="subjectCard">
+                <h4>General Knowledge</h4>
+                <div class="levelBtns">
+                  <button class="btn small" onclick="startTest('General Knowledge','Intermediate level')">Intermediate</button>
+                  <button class="btn small" onclick="startTest('General Knowledge','Hard level')">Hard</button>
+                  <button class="btn small" onclick="startTest('General Knowledge','Easy level')">Easy</button>
+                </div>
+              </div>
+              <div class="subjectCard">
+                <h4>Aptitude</h4>
+                <div class="levelBtns">
+                  <button class="btn small" onclick="startTest('Aptitude','Intermediate level')">Intermediate</button>
+                  <button class="btn small" onclick="startTest('Aptitude','Hard')">Hard</button>
+                  <button class="btn small" onclick="startTest('Aptitude','Hard')">Hard</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TEST UI -->
+          <div id="testPanel" class="panel hidden">
+            <div class="testHeader">
+              <h3 id="testTitle">Test</h3>
+              <div class="timer">
+                Time: <span id="timeRemaining">00:00</span>
+              </div>
+            </div>
+
+            <div id="questionBox" class="questionBox"></div>
+
+            <div class="testFooter">
+              <button id="prevQ" class="btn secondary">Previous</button>
+              <button id="nextQ" class="btn">Next</button>
+              <button id="submitTestBtn" class="btn primary">Submit Test</button>
+            </div>
+          </div>
+
+          <!-- result panel -->
+          <div id="resultPanel" class="panel hidden">
+            <h3>Test Result</h3>
+            <p id="resultText"></p>
+            <div id="resultDetails"></div>
+            <button id="backToDash" class="btn">Back to Dashboard</button>
+          </div>
+
+          <!-- history list -->
+          <div id="historyPanel" class="panel hidden">
+            <h3>Your Attempts</h3>
+            <ul id="allHistory"></ul>
+          </div>
+        </section>
+      </main>
+
+      <footer class="card-footer">
+        <small>Client-side demo • Use Supabase for persistent storage</small>
+      </footer>
+    </div>
+  </div>
+
+  <!-- application JS -->
+  <script src="pre_sat_apps.js"></script>
+</body>
+</html>
+
+
