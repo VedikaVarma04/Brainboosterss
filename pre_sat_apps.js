@@ -311,6 +311,7 @@ function showProfileUI(){
 btnLogout.addEventListener('click', async ()=>{
   await sb.auth.signOut();
   currentUser = null; profile = null;
+  welcomeSmall.innerText = "Welcome - Please login or register"
   profileBox.classList.add('hidden');
   authBox.classList.remove('hidden');
   // reset visible panels
