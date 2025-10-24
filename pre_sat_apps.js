@@ -138,7 +138,7 @@ const QUESTION_DB = {
       {q:"Capital of France?", options:["Paris","Rome","Berlin","Madrid"], a:"Paris"},
       {q:"Which planet has rings?", options:["Earth","Mars","Saturn","Venus"], a:"Saturn"},
       {q:"Largest ocean?", options:["Atlantic","Indian","Pacific","Arctic"], a:"Pacific"},
-      {q:"(Open) Which Indian city is known as the 'Financial Capital of India'?".", input:true, a:"Mumbai"},
+      {q:"(Open) Which Indian city is known as the 'Financial Capital of India'?", input:true, a:"Mumbai"},
       {q:"Who wrote Hamlet?", options:["Shakespeare","Dickens","Homer","Plato"], a:"Shakespeare"},
       {q:"Which gas do we breathe in?", options:["Oxygen","Carbon Dioxide","Hydrogen","Helium"], a:"Oxygen"},
       {q:"Which is a mammal?", options:["Shark","Dolphin","Tuna","Octopus"], a:"Dolphin"},
@@ -155,7 +155,7 @@ const QUESTION_DB = {
       {q:"Which element's symbol is O?", options:["Gold","Oxygen","Silver","Hydrogen"], a:"Oxygen"},
       {q:"Which year did WW2 end?", options:["1940","1945","1950","1939"], a:"1945"},
       {q:"Currency of Japan?", options:["Yen","Dollar","Euro","Rupee"], a:"Yen"},
-      {q:"(Open)Who wrote the national anthem of India?", input:true, a:"Rabindranath Tagore"},
+      {q:"(Open) Who wrote the national anthem of India?", input:true, a:"Rabindranath Tagore"},
       {q:"What does photosynthesis produce?", options:["CO2","O2","N2","H2"], a:"O2"},
       {q:"Which continent is known as the 'Dark Continent'?", options:["Asia","Africa","Australia","Europe"], a:"Africa"}
     ],
