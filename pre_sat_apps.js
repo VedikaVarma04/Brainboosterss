@@ -253,38 +253,82 @@ btnRegister.addEventListener('click', async (e)=>{
   const name = regName.value.trim();
   const email = regEmail.value.trim();
   const password = regPassword.value;
-  if(!name || !email || password.length < 6){ alert('Please fill name/email and password (min 6 chars).'); return; }
-  btnRegister.disabled = true;
-  const { data, error } = await sb.auth.signUp({ email, password });
-  if(error){ alert('Sign up error: '+error.message); btnRegister.disabled = false; return; }
-  // signUp succeeded; create profile
-  const user = data.user;
-  try{
-    await sb.from('profiles').insert([{ id: user.id, full_name: name, avatar: selectedAvatar }]);
-    alert('Registration successful. You may now log in.');
-    // switch to login tab automatically
-    tabLogin.click();
-    regName.value=''; regEmail.value=''; regPassword.value='';
-  }catch(err){
-    console.error(err);
-    alert('Error creating profile.');
+  if(!name || !email || password.length < 6){ 
+    alert('Please fill name/email and password (min 6 chars).'); 
+    return; 
   }
+  btnRegister.disabled = true;
+
+  // sign up user
+  const { data: signUpData, error: signUpError } = await sb.auth.signUp({ email, password });
+  if(signUpError){ 
+    alert('Sign up error: ' + signUpError.message); 
+    btnRegister.disabled = false; 
+    return; 
+  }
+
+  const user = signUpData.user;
+  if(!user){
+    alert('Sign up failed, no user returned.');
+    btnRegister.disabled = false;
+    return;
+  }
+
+  // create profile row
+  const { error: profileError } = await sb.from('profiles').insert([
+    { id: user.id, full_name: name, avatar: selectedAvatar }
+  ]);
+
+  if(profileError){
+    console.error(profileError);
+    alert('Error creating profile: ' + profileError.message);
+  } else {
+    alert('Registration successful. You may now log in.');
+    // reset form and switch to login tab
+    regName.value=''; regEmail.value=''; regPassword.value='';
+    tabLogin.click();
+  }
+
   btnRegister.disabled = false;
 });
+;
 
 // login
 btnLogin.addEventListener('click', async (e)=>{
   e.preventDefault();
   const email = loginEmail.value.trim();
   const password = loginPassword.value;
-  if(!email || !password){ alert('Enter email and password'); return; }
+  if(!email || !password){ 
+    alert('Enter email and password'); 
+    return; 
+  }
   btnLogin.disabled = true;
-  const { data, error } = await sb.auth.signInWithPassword({ email, password });
-  if(error){ alert('Login error: '+error.message); btnLogin.disabled = false; return; }
-  currentUser = data.user;
-  await afterLogin();
+  const { data: loginData, error: loginError } = await sb.auth.signInWithPassword({ email, password });
+  if(loginError){
+    alert('Login error: ' + loginError.message);
+    btnLogin.disabled = false;
+    return;
+  }
+  const user = loginData.user;
+  if(!user){
+    alert('Login failed: No user returned');
+    btnLogin.disabled = false;
+    return;
+  }
+  currentUser = user;
+  // fetch profile row
+  const { data: profileData, error: profileError } = await sb.from('profiles').select('*').eq('id', currentUser.id).single();
+  if(profileError || !profileData){
+    alert('Profile not found for this user. Please register again.');
+    btnLogin.disabled = false;
+    return;
+  }
+  profile = profileData;
+  showProfileUI();
+  await loadDashboardData();
   btnLogin.disabled = false;
 });
+
 
 // after login: load profile and show dashboard
 async function afterLogin(){
@@ -313,17 +357,22 @@ function showProfileUI(){
 }
 
 // logout
-btnLogout.addEventListener('click', async ()=>{
+btnLogout.addEventListener('click', async ()=> {
   await sb.auth.signOut();
-  currentUser = null; profile = null;
-  welcomeSmall.innerText = "Welcome - Please login or register"
-  profileBox.classList.add('hidden');
+  currentUser = null;
+  profile = null;
+  
+  // reset UI
   authBox.classList.remove('hidden');
-  // reset visible panels
+  profileBox.classList.add('hidden');
   hideAllPanels();
+  
   loginForm.classList.remove('hidden');
-  tabLogin.click();
+  tabLogin.classList.add('active');
+  tabRegister.classList.remove('active');
+  welcomeSmall.innerText = "Welcome — please login or register";
 });
+
 
 // navigation
 btnDashboard.addEventListener('click', showDashboard);
@@ -565,19 +614,19 @@ async function submitTest(){
   const timeTaken = (Date.now() - currentTest.startedAt) / 1000; // seconds
 
   // store to supabase results
-  try{
-    const payload = {
-      user_id: currentUser.id,
-      subject: currentTest.subject,
-      level: currentTest.level,
-      score: score,
-      time_taken_seconds: timeTaken,
-      per_question_times: currentTest.questionTimes
-    };
-    await sb.from('results').insert([payload]);
-  }catch(e){
-    console.error('store error', e);
-  }
+try{
+  const payload = {
+    user_id: currentUser.id,
+    subject: currentTest.subject,
+    level: currentTest.level,
+    score: score,
+    time_taken_seconds: timeTaken,
+    per_question_times: currentTest.questionTimes
+  };
+  await sb.from('results').insert([payload]);
+}catch(e){
+  console.error('store error', e);
+}
 
   // show result panel
   hideAllPanels();
@@ -606,16 +655,32 @@ async function submitTest(){
 }
 
 // on load: check if session exists
-(async function init(){
-  // check active session
-  const s = await sb.auth.getSession();
-  if(s?.data?.session?.user){
-    currentUser = s.data.session.user;
-    await afterLogin();
-  } else {
-    // show auth box
+(async function init() {
+  try {
+    // Check if a session exists
+    const { data: { session } } = await sb.auth.getSession();
+
+    if (session?.user) {
+      // user is logged in
+      currentUser = session.user;
+      await afterLogin();
+    } else {
+      // no active session
+      authBox.classList.remove('hidden');
+      profileBox.classList.add('hidden');
+      hideAllPanels();
+      loginForm.classList.remove('hidden');
+      tabLogin.classList.add('active');
+      tabRegister.classList.remove('active');
+    }
+  } catch (err) {
+    console.error('Session init error', err);
     authBox.classList.remove('hidden');
     profileBox.classList.add('hidden');
+    hideAllPanels();
+    loginForm.classList.remove('hidden');
+    tabLogin.classList.add('active');
+    tabRegister.classList.remove('active');
   }
 })();
 
