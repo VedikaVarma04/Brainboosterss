@@ -414,51 +414,31 @@ async function renderAllHistory(){
 
 // ----------------- TEST FLOW -----------------
 
-// startTest called from HTML buttons
 async function startTest(subject, level){ 
-  if(!currentUser){ 
-    alert('Please login first'); 
-    return; 
-  }
-
-  // ✅ Normalize subject so UI and DB always match
-  subject = subject.trim().toLowerCase();
-  if (subject.includes("math")) subject = "Maths";
-  if (subject.includes("general")) subject = "General Knowledge";
-  if (subject.includes("apt")) subject = "Aptitude";
+  if(!currentUser){ alert('Please login first'); return; }
 
   hideAllPanels();
   testPanel.classList.remove('hidden');
   testTitle.innerText = `${subject} — ${level}`;
 
-  // ✅ Get questions safely
   const qset = QUESTION_DB?.[subject]?.[level] || [];
   if(qset.length === 0){
-    alert(`⚠️ No questions found for ${subject} - ${level}. Check QUESTION_DB key names.`);
+    alert(`No questions found for ${subject} - ${level}`);
     return;
   }
 
-  // clone questions
-  const questions = JSON.parse(JSON.stringify(qset));
-
-  // ✅ Initialize test state
   currentTest = {
     subject,
     level,
-    questions,
+    questions: JSON.parse(JSON.stringify(qset)),
     index: 0,
-    answers: new Array(questions.length).fill(null),
-    questionTimes: new Array(questions.length).fill(0),
+    answers: new Array(qset.length).fill(null),
+    questionTimes: new Array(qset.length).fill(0),
     startedAt: Date.now(),
-    timeLeft: 10 * 60, // 10 mins
+    timeLeft: 10*60,
     timerInterval: null,
     questionStartAt: Date.now()
   };
-
-  // ✅ Start rendering first question
-  showQuestion();
-  startTimer();
-}
 
   // start timer
   timeRemaining.innerText = formatTime(currentTest.timeLeft);
@@ -468,19 +448,18 @@ async function startTest(subject, level){
     timeRemaining.innerText = formatTime(currentTest.timeLeft);
     if(currentTest.timeLeft <= 0){
       clearInterval(currentTest.timerInterval);
-      alert('Time is up! Submitting test automatically.');
+      alert('Time is up! Submitting test.');
       submitTest();
     }
-  }, 1000);
+  },1000);
 
   renderQuestion();
 }
 
-// render a single question (index = currentTest.index)
+// render question
 function renderQuestion(){
   const i = currentTest.index;
   const q = currentTest.questions[i];
-  // record time start for this question
   currentTest.questionStartAt = Date.now();
 
   questionBox.innerHTML = '';
@@ -505,22 +484,21 @@ function renderQuestion(){
     (q.options || []).forEach(opt=>{
       const label = document.createElement('label');
       label.className = 'optionLabel';
-      label.innerHTML = `<input type="radio" name="opt" value="${opt}" ${currentTest.answers[i]===opt ? 'checked' : ''}> ${opt}`;
+      label.innerHTML = `<input type="radio" name="opt${i}" value="${opt}" ${currentTest.answers[i]===opt ? 'checked' : ''}> ${opt}`;
       label.onclick = ()=>{
         currentTest.answers[i] = opt;
-        // record time for the question: time between questionStartAt and this click
-        const t = (Date.now() - currentTest.questionStartAt) / 1000;
-        currentTest.questionTimes[i] = (currentTest.questionTimes[i] || 0) + t;
+        const t = (Date.now() - currentTest.questionStartAt)/1000;
+        currentTest.questionTimes[i] = (currentTest.questionTimes[i]||0)+t;
       };
       opts.appendChild(label);
     });
   }
-  questionBox.appendChild(opts);
 
-  // update nav buttons
-  prevQbtn.style.display = i>0 ? 'inline-block' : 'none';
-  nextQbtn.style.display = i < currentTest.questions.length-1 ? 'inline-block' : 'none';
+  questionBox.appendChild(opts);
+  prevQbtn.style.display = i>0 ? 'inline-block':'none';
+  nextQbtn.style.display = i<currentTest.questions.length-1 ? 'inline-block':'none';
 }
+
 
 // navigation
 prevQbtn.addEventListener('click', ()=>{
