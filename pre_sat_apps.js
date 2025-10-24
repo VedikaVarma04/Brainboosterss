@@ -415,15 +415,33 @@ async function renderAllHistory(){
 // ----------------- TEST FLOW -----------------
 
 // startTest called from HTML buttons
-async function startTest(subject, level){
-  if(!currentUser){ alert('Please login first'); return; }
+async function startTest(subject, level){ 
+  if(!currentUser){ 
+    alert('Please login first'); 
+    return; 
+  }
+
+  // ✅ Normalize subject so UI and DB always match
+  subject = subject.trim().toLowerCase();
+  if (subject.includes("math")) subject = "Maths";
+  if (subject.includes("general")) subject = "General Knowledge";
+  if (subject.includes("apt")) subject = "Aptitude";
+
   hideAllPanels();
   testPanel.classList.remove('hidden');
   testTitle.innerText = `${subject} — ${level}`;
-  // prepare test
-  const qset = (QUESTION_DB[subject] && QUESTION_DB[subject][level]) ? QUESTION_DB[subject][level] : [];
-  const questions = JSON.parse(JSON.stringify(qset)); // clone
-  // state
+
+  // ✅ Get questions safely
+  const qset = QUESTION_DB?.[subject]?.[level] || [];
+  if(qset.length === 0){
+    alert(`⚠️ No questions found for ${subject} - ${level}. Check QUESTION_DB key names.`);
+    return;
+  }
+
+  // clone questions
+  const questions = JSON.parse(JSON.stringify(qset));
+
+  // ✅ Initialize test state
   currentTest = {
     subject,
     level,
@@ -432,10 +450,16 @@ async function startTest(subject, level){
     answers: new Array(questions.length).fill(null),
     questionTimes: new Array(questions.length).fill(0),
     startedAt: Date.now(),
-    timeLeft: 10 * 60, // seconds (10 minutes) - adjust if you want smaller
+    timeLeft: 10 * 60, // 10 mins
     timerInterval: null,
     questionStartAt: Date.now()
   };
+
+  // ✅ Start rendering first question
+  showQuestion();
+  startTimer();
+}
+
   // start timer
   timeRemaining.innerText = formatTime(currentTest.timeLeft);
   if(currentTest.timerInterval) clearInterval(currentTest.timerInterval);
