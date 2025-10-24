@@ -92,16 +92,16 @@ const AVATARS = [
 const QUESTION_DB = {
   "Maths": {
     "Intermediate": [
-      {q:"if 3x - 7 = 11, what is the value of x?", options:["2","3","5","6"], a:"6"},
-      {q:"A rectanglw has a perimeter of 50 units. If the length is 15 units , what is the width?", options:["10","12","20","25"], a:"10"},
-      {q:"if f(x) = 2x^2 -3x = 1, what is f(2)?", options:["3","5","7","9"], a:"3"},
-      {q:"if x^2 - 5x + 6 = 0, what are the possible values of x?", options:["1,6","2,3","2,-3","3,6"], a:"2,3"},
-      {q:"(Open) A train travels at a constant speed of 60 miles per hour.How far will it travel in 2 hours and 30 minutes?", input:true +"  miles", a:"150"},
-      {q:"The sum of three consecutive integers is 72.What is the largest integer?", options:["23","24","25","26"], a:"25"},
-      {q:"A circle has a radius of 7 units.What is its area? ( Use π )", options:["14π","49π","28π","21π"], a:"49π"},
-      {q:"f 5x+2=3x+10, then x=?", options:["2","3","4","5"], a:"4"},
-      {q:"A store reduces the price of a jacket by 20%.If the orignal price is $180, what is the sale price?", options:["$60","$144","$65","$216"], a:"144"},
-      {q:"Solve for y: 2(y−3)=4y+2", options:["-4","-2","2","4"], a:"-4"}
+      {q:"If 3x - 7 = 11, what is the value of x?", options:["2","3","5","6"], a:"6"},
+      {q:"A rectangle has a perimeter of 50 units. If the length is 15 units, what is the width?", options:["10","12","20","25"], a:"10"},
+      {q:"If f(x) = 2x^2 - 3x + 1, what is f(2)?", options:["3","5","7","9"], a:"3"},
+      {q:"If x^2 - 5x + 6 = 0, what are the possible values of x?", options:["1,6","2,3","2,-3","3,6"], a:"2,3"},
+      {q:"(Open) A train travels at a constant speed of 60 miles per hour. How far will it travel in 2 hours and 30 minutes?", input:true, a:"150 miles"},
+      {q:"The sum of three consecutive integers is 72. What is the largest integer?", options:["23","24","25","26"], a:"25"},
+      {q:"A circle has a radius of 7 units. What is its area? (Use π)", options:["14π","49π","28π","21π"], a:"49π"},
+      {q:"If 5x + 2 = 3x + 10, then x = ?", options:["2","3","4","5"], a:"4"},
+      {q:"A store reduces the price of a jacket by 20%. If the original price is $180, what is the sale price?", options:["$60","$144","$65","$216"], a:"$144"},
+      {q:"Solve for y: 2(y − 3) = 4y + 2", options:["-4","-2","2","4"], a:"-4"}
     ],
     "Hard": [
       {q:"2^5 = ?", options:["16","32","64","8"], a:"32"},
@@ -113,7 +113,7 @@ const QUESTION_DB = {
       {q:"If perimeter of square is 20, side = ?", options:["5","4","6","10"], a:"5"},
       {q:"LCM of 4 and 6 = ?", options:["12","10","8","6"], a:"12"},
       {q:"2^8 = ?", options:["128","256","512","64"], a:"256"},
-      {q:"Sum of angles in triangle = ?", options:["90","180","270","360"], a:"180"}
+      {q:"Sum of angles in a triangle = ?", options:["90","180","270","360"], a:"180"}
     ],
     "Easy": [
       {q:"2^5 = ?", options:["16","32","64","8"], a:"32"},
@@ -121,7 +121,7 @@ const QUESTION_DB = {
       {q:"Solve: 3x - 6 = 9, x = ?", options:["3","4","5","1"], a:"5"},
       {q:"(Open) What is 17 × 6?", input:true, a:"102"},
       {q:"(Open) 13 × 7 = ?", input:true, a:"91"},
-      {q:"If x=3, 2x+4=?", options:["10","8","6","12"], a:"10"},
+      {q:"If x = 3, 2x + 4 = ?", options:["10","8","6","12"], a:"10"},
       {q:"What is 20% of 200?", options:["20","40","30","50"], a:"40"},
       {q:"3² = ?", options:["6","9","12","15"], a:"9"},
       {q:"5 + 7 = ?", options:["11","12","13","10"], a:"12"},
@@ -134,9 +134,9 @@ const QUESTION_DB = {
       {q:"Capital of France?", options:["Paris","Rome","Berlin","Madrid"], a:"Paris"},
       {q:"Which planet has rings?", options:["Earth","Mars","Saturn","Venus"], a:"Saturn"},
       {q:"Largest ocean?", options:["Atlantic","Indian","Pacific","Arctic"], a:"Pacific"},
-      {q:"(Open) Name largest continent.", input:true, a:"Asia"},
+      {q:"(Open) Name the largest continent.", input:true, a:"Asia"},
       {q:"Who wrote Hamlet?", options:["Shakespeare","Dickens","Homer","Plato"], a:"Shakespeare"},
-      {q:"Which gas we breathe in?", options:["Oxygen","Carbon Dioxide","Hydrogen","Helium"], a:"Oxygen"},
+      {q:"Which gas do we breathe in?", options:["Oxygen","Carbon Dioxide","Hydrogen","Helium"], a:"Oxygen"},
       {q:"Which is a mammal?", options:["Shark","Dolphin","Tuna","Octopus"], a:"Dolphin"},
       {q:"Which city is the capital of India?", options:["New Delhi","Mumbai","Kolkata","Chennai"], a:"New Delhi"},
       {q:"Which country built the Great Wall?", options:["China","India","Egypt","Greece"], a:"China"},
@@ -144,26 +144,26 @@ const QUESTION_DB = {
     ],
     "Hard": [
       {q:"Who discovered penicillin?", options:["Curie","Newton","Fleming","Edison"], a:"Fleming"},
-      {q:"(Open) Who painted Mona Lisa?", input:true, a:"Leonardo da Vinci"},
+      {q:"(Open) Who painted the Mona Lisa?", input:true, a:"Leonardo da Vinci"},
       {q:"What is the largest planet in our solar system?", options:["Mars","Saturn","Jupiter","Earth"], a:"Jupiter"},
       {q:"UN HQ is in which city?", options:["Geneva","New York","Paris","London"], a:"New York"},
       {q:"Which element's symbol is O?", options:["Gold","Oxygen","Silver","Hydrogen"], a:"Oxygen"},
       {q:"Which year did WW2 end?", options:["1940","1945","1950","1939"], a:"1945"},
       {q:"Currency of Japan?", options:["Yen","Dollar","Euro","Rupee"], a:"Yen"},
       {q:"Biggest planet?", options:["Earth","Mars","Jupiter","Saturn"], a:"Jupiter"},
-      {q:"What is photosynthesis produce?", options:["CO2","O2","N2","H2"], a:"O2"},
+      {q:"What does photosynthesis produce?", options:["CO2","O2","N2","H2"], a:"O2"},
       {q:"Smallest continent?", options:["Europe","Australia","Antarctica","South America"], a:"Australia"}
     ],
     "Easy": [
-      {q:"WWho wrote Romeo and juliet", options:["Charles Dickens","William Shakespeare","J.K Rowling","Mark Twain"], a:"William Shakespeare"},
-      {q:"(Open) Capital of south korea", input:true, a:"Seoul"},
-      {q:"Which country has largest population?", options:["USA","India","China","Russia"], a:"China"},
+      {q:"Who wrote Romeo and Juliet?", options:["Charles Dickens","William Shakespeare","J.K Rowling","Mark Twain"], a:"William Shakespeare"},
+      {q:"(Open) Capital of South Korea", input:true, a:"Seoul"},
+      {q:"Which country has the largest population?", options:["USA","India","China","Russia"], a:"China"},
       {q:"The Great Wall is in which country?", options:["India","China","Japan","Mongolia"], a:"China"},
-      {q:"Who discovered gravity?", options:["Albert Einstein","Issac Newton","Galileo Galilei","Nikola Tesla"], a:"Issac Newton"},
-      {q:"India's first prime minister?", options:["Mahatma Gandhi","Jawaharlal Nehru","Sardar Patel","Indra gandhi"], a:"Jawaharlal Nehru"},
-      {q:"Which festival Is known as festival of lights ", options:["holi","Diwali","Baisakhi","Ganeshutsav"], a:"Diwali"},
+      {q:"Who discovered gravity?", options:["Albert Einstein","Isaac Newton","Galileo Galilei","Nikola Tesla"], a:"Isaac Newton"},
+      {q:"India's first Prime Minister?", options:["Mahatma Gandhi","Jawaharlal Nehru","Sardar Patel","Indira Gandhi"], a:"Jawaharlal Nehru"},
+      {q:"Which festival is known as the festival of lights?", options:["Holi","Diwali","Baisakhi","Ganeshutsav"], a:"Diwali"},
       {q:"Biggest planet?", options:["Earth","Mars","Jupiter","Saturn"], a:"Jupiter"},
-      {q:"Longest river in the world is: ", options:["Amazon","Ganga","Nile","Mississippi"], a:"Nile"},
+      {q:"Longest river in the world is:", options:["Amazon","Ganga","Nile","Mississippi"], a:"Nile"},
       {q:"Smallest continent?", options:["Europe","Australia","Antarctica","South America"], a:"Australia"}
     ]
   },
@@ -171,15 +171,15 @@ const QUESTION_DB = {
   "Aptitude": {
     "Intermediate": [
       {q:"5 + 7 = ?", options:["11","12","13","10"], a:"12"},
-      {q:"If ratio 2:3 and total 25, larger is?", options:["10","15","15","20"], a:"15"},
-      {q:"317 X 25 = ?", options:["7925","7920","7930","7900"], a:"7925"},
-      {q:"(Open) A car travels 150km in 3 hours and 30 minutes.What is its average speed in km/h?", input:true, a:"42.86" + " km/h"},
-      {q:"if 20% of a number is 50, what is the number?", options:["200","250","300","350"], a:"250"},
-      {q:"which number comes next in the series:2,6,12,20,30,..?", options:["36","40","42","50"], a:"42"},
-      {q:"A shopkeeper buys an article for $500 and sells it for $600.Whar is the profit percentage?", options:["15%","24%","18%","20%"], a:"20%"},
-      {q:"A bag contains 6 red,4 blue and 5 green balls,What is the probability of picking a blue ball?", options:["5/13","5/14","5/17","6/15"], a:"5/15"},
-      {q:"(Open)A train travels 150km in 2 hours and 30 minutes.What is its average speed?", input:true, a:"60" + " km/h"},
-      {q:"A clock shows 3:00.What is the angle between the hour and minutes hands?", options:["75°","90°","95°","100°"], a:"90°"}
+      {q:"If ratio is 2:3 and total is 25, larger part is?", options:["10","15","15","20"], a:"15"},
+      {q:"317 × 25 = ?", options:["7925","7920","7930","7900"], a:"7925"},
+      {q:"(Open) A car travels 150 km in 3 hours and 30 minutes. What is its average speed in km/h?", input:true, a:"42.86 km/h"},
+      {q:"If 20% of a number is 50, what is the number?", options:["200","250","300","350"], a:"250"},
+      {q:"Which number comes next in the series: 2, 6, 12, 20, 30,..?", options:["36","40","42","50"], a:"42"},
+      {q:"A shopkeeper buys an article for $500 and sells it for $600. What is the profit percentage?", options:["15%","24%","18%","20%"], a:"20%"},
+      {q:"A bag contains 6 red, 4 blue and 5 green balls. What is the probability of picking a blue ball?", options:["5/13","5/14","5/17","4/15"], a:"4/15"},
+      {q:"(Open) A train travels 150 km in 2 hours and 30 minutes. What is its average speed?", input:true, a:"60 km/h"},
+      {q:"A clock shows 3:00. What is the angle between the hour and minute hands?", options:["75°","90°","95°","100°"], a:"90°"}
     ],
     "Hard": [
       {q:"7 × 8 = ?", options:["54","56","58","60"], a:"56"},
@@ -187,21 +187,21 @@ const QUESTION_DB = {
       {q:"(Open) 11 × 14 = ?", input:true, a:"154"},
       {q:"GCD of 30 and 45?", options:["5","10","15","20"], a:"15"},
       {q:"10% of 250?", options:["25","20","30","15"], a:"25"},
-      {q:"If 5x=20 then x=?", options:["2","3","4","5"], a:"4"},
-      {q:"Which is square number?", options:["20","25","26","27"], a:"25"},
-      {q:"If x+y=10 and x=6, y=?", options:["4","3","5","6"], a:"4"},
+      {q:"If 5x = 20 then x = ?", options:["2","3","4","5"], a:"4"},
+      {q:"Which is a square number?", options:["20","25","26","27"], a:"25"},
+      {q:"If x + y = 10 and x = 6, y = ?", options:["4","3","5","6"], a:"4"},
       {q:"What is 2^6 ?", options:["64","32","16","128"], a:"64"},
       {q:"Sum of 1 to 5 = ?", options:["10","15","12","20"], a:"15"}
     ],
     "Easy": [
-      {q:"The area of a square is 49sq unit.What is the length of one side?", options:["5","6","7","8"], a:"7"},
-      {q:"A bag has 5red and 3 blue balls.If one ball is picked at random,what is the probability it is blue?", options:["1/8","1/4","3/8","3/5"], a:"3/8"},
+      {q:"The area of a square is 49 sq units. What is the length of one side?", options:["5","6","7","8"], a:"7"},
+      {q:"A bag has 5 red and 3 blue balls. If one ball is picked at random, what is the probability it is blue?", options:["1/8","1/4","3/8","3/5"], a:"3/8"},
       {q:"12 ÷ 4 = ?", options:["2","3","4","6"], a:"3"},
-      {q:"(Open) How many degrees in triangle?", input:true, a:"180"},
+      {q:"(Open) How many degrees in a triangle?", input:true, a:"180"},
       {q:"10 × 2 = ?", options:["12","20","18","22"], a:"20"},
-      {q:"Which is even prime?", options:["1","2","3","5"], a:"2"},
+      {q:"Which is the even prime?", options:["1","2","3","5"], a:"2"},
       {q:"Next in series 2,4,8,16,?", options:["20","24","32","30"], a:"32"},
-      {q:"Probability of heads in fair coin?", options:["1/2","1/3","1/4","1/6"], a:"1/2"},
+      {q:"Probability of heads in a fair coin?", options:["1/2","1/3","1/4","1/6"], a:"1/2"},
       {q:"LCM of 3 and 4?", options:["6","7","12","9"], a:"12"},
       {q:"Square root of 36?", options:["5","6","7","8"], a:"6"}
     ]
