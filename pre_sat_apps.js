@@ -79,14 +79,18 @@ const QUOTES = [
   "A little more practice — you'll be surprised how fast you improve."
 ];
 
-// avatar options (fun cartoon/adventurer style)
+// Aesthetic minimal profile avatars (Notion-style)
 const AVATARS = [
-  'https://api.dicebear.com/6.x/adventurer/svg?seed=cartoon1',
-  'https://api.dicebear.com/6.x/adventurer/svg?seed=cartoon2',
-  'https://api.dicebear.com/6.x/adventurer/svg?seed=cartoon3',
-  'https://api.dicebear.com/6.x/adventurer/svg?seed=cartoon4',
-  'https://api.dicebear.com/6.x/adventurer/svg?seed=cartoon5'
+  "https://api.dicebear.com/7.x/notionists/svg?seed=Luna",
+  "https://api.dicebear.com/7.x/notionists/svg?seed=Ivy",
+  "https://api.dicebear.com/7.x/notionists/svg?seed=Nova",
+  "https://api.dicebear.com/7.x/notionists/svg?seed=Milo",
+  "https://api.dicebear.com/7.x/notionists/svg?seed=Kai",
+  "https://api.dicebear.com/7.x/notionists/svg?seed=River",
+  "https://api.dicebear.com/7.x/notionists/svg?seed=Zen",
+  "https://api.dicebear.com/7.x/notionists/svg?seed=Aria"
 ];
+
 
 // QUESTIONS DATABASE: 3 subjects × 2 levels × 10 Q each (simplified SAT-ish)
 const QUESTION_DB = {
