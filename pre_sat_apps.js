@@ -138,25 +138,26 @@ const QUESTION_DB = {
       {q:"Capital of France?", options:["Paris","Rome","Berlin","Madrid"], a:"Paris"},
       {q:"Which planet has rings?", options:["Earth","Mars","Saturn","Venus"], a:"Saturn"},
       {q:"Largest ocean?", options:["Atlantic","Indian","Pacific","Arctic"], a:"Pacific"},
-      {q:"(Open) Name the largest continent.", input:true, a:"Asia"},
+      {q:"(Open) Which Indian city is known as the 'Financial Capital of India'?".", input:true, a:"Mumbai"},
       {q:"Who wrote Hamlet?", options:["Shakespeare","Dickens","Homer","Plato"], a:"Shakespeare"},
       {q:"Which gas do we breathe in?", options:["Oxygen","Carbon Dioxide","Hydrogen","Helium"], a:"Oxygen"},
       {q:"Which is a mammal?", options:["Shark","Dolphin","Tuna","Octopus"], a:"Dolphin"},
       {q:"Which city is the capital of India?", options:["New Delhi","Mumbai","Kolkata","Chennai"], a:"New Delhi"},
-      {q:"Which country built the Great Wall?", options:["China","India","Egypt","Greece"], a:"China"},
-      {q:"Which is the smallest prime?", options:["1","2","3","0"], a:"2"}
+      {q:"What is the capital city of Sri Lanka?", options:["Colombo","Kandy","Galle","Jaffna"], a:"Colombo"},
+      {q:"Which ancient university, considered one of the earliest in the world, was located in India and attracted students from countries like China, Greece, and Persia?", options:["Takshashila","Nalanda","Vikramashila","Valabhi"], a:"Nalanda"}
+
     ],
     "Hard": [
       {q:"Who discovered penicillin?", options:["Curie","Newton","Fleming","Edison"], a:"Fleming"},
       {q:"(Open) Who painted the Mona Lisa?", input:true, a:"Leonardo da Vinci"},
       {q:"What is the largest planet in our solar system?", options:["Mars","Saturn","Jupiter","Earth"], a:"Jupiter"},
-      {q:"UN HQ is in which city?", options:["Geneva","New York","Paris","London"], a:"New York"},
+      {q:"United nations HQ is in which city?", options:["Geneva","New York","Paris","London"], a:"New York"},
       {q:"Which element's symbol is O?", options:["Gold","Oxygen","Silver","Hydrogen"], a:"Oxygen"},
       {q:"Which year did WW2 end?", options:["1940","1945","1950","1939"], a:"1945"},
       {q:"Currency of Japan?", options:["Yen","Dollar","Euro","Rupee"], a:"Yen"},
-      {q:"Biggest planet?", options:["Earth","Mars","Jupiter","Saturn"], a:"Jupiter"},
+      {q:"(Open)Who wrote the national anthem of India?", input:true, a:"Rabindranath Tagore"},
       {q:"What does photosynthesis produce?", options:["CO2","O2","N2","H2"], a:"O2"},
-      {q:"Smallest continent?", options:["Europe","Australia","Antarctica","South America"], a:"Australia"}
+      {q:"Which continent is known as the 'Dark Continent'?", options:["Asia","Africa","Australia","Europe"], a:"Africa"}
     ],
     "Easy": [
       {q:"Who wrote Romeo and Juliet?", options:["Charles Dickens","William Shakespeare","J.K Rowling","Mark Twain"], a:"William Shakespeare"},
@@ -166,7 +167,7 @@ const QUESTION_DB = {
       {q:"Who discovered gravity?", options:["Albert Einstein","Isaac Newton","Galileo Galilei","Nikola Tesla"], a:"Isaac Newton"},
       {q:"India's first Prime Minister?", options:["Mahatma Gandhi","Jawaharlal Nehru","Sardar Patel","Indira Gandhi"], a:"Jawaharlal Nehru"},
       {q:"Which festival is known as the festival of lights?", options:["Holi","Diwali","Baisakhi","Ganeshutsav"], a:"Diwali"},
-      {q:"Biggest planet?", options:["Earth","Mars","Jupiter","Saturn"], a:"Jupiter"},
+      {q:"Which planet is known as the Red Planet?", options:["Earth","Venus","Mars","Jupiter"], a:"Mars"},
       {q:"Longest river in the world is:", options:["Amazon","Ganga","Nile","Mississippi"], a:"Nile"},
       {q:"Smallest continent?", options:["Europe","Australia","Antarctica","South America"], a:"Australia"}
     ]
