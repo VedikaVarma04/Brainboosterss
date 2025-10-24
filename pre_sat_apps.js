@@ -415,7 +415,22 @@ async function renderAllHistory(){
 // ----------------- TEST FLOW -----------------
 
 async function startTest(subject, level){ 
-  if(!currentUser){ alert('Please login first'); return; }
+  if(!currentUser){ 
+    alert('Please login first'); 
+    return; 
+  }
+
+  // ------------------ normalize subject ------------------
+  subject = subject.trim().toLowerCase();
+  if (subject.includes("math")) subject = "Maths";
+  if (subject.includes("general")) subject = "General Knowledge";
+  if (subject.includes("apt")) subject = "Aptitude";
+
+  // ------------------ normalize level ------------------
+  level = level.trim().toLowerCase();
+  if(level.includes("easy")) level = "Easy";
+  if(level.includes("intermediate")) level = "Intermediate";
+  if(level.includes("hard")) level = "Hard";
 
   hideAllPanels();
   testPanel.classList.remove('hidden');
@@ -498,7 +513,6 @@ function renderQuestion(){
   prevQbtn.style.display = i>0 ? 'inline-block':'none';
   nextQbtn.style.display = i<currentTest.questions.length-1 ? 'inline-block':'none';
 }
-
 
 // navigation
 prevQbtn.addEventListener('click', ()=>{
