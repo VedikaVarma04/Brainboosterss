@@ -17,16 +17,19 @@
   <div class="page">
     <div class="card">
 
+      <!-- HEADER -->
       <header class="card-header">
         <h1>ACE – Assessment of Cognitive Excellence</h1>
         <p id="welcomeSmall">Welcome — please login or register</p>
       </header>
 
+      <!-- MAIN CONTENT -->
       <main class="card-body">
-        <!-- LEFT: auth / profile / nav -->
+        
+        <!-- LEFT COLUMN -->
         <section class="left-col">
 
-          <!-- LOGIN / REGISTER -->
+          <!-- LOGIN / REGISTER BOX -->
           <div id="authBox">
             <div class="tabs">
               <button id="tabLogin" class="tab active">Login</button>
@@ -53,7 +56,7 @@
             </form>
           </div>
 
-          <!-- AFTER LOGIN: profile + nav -->
+          <!-- AFTER LOGIN -->
           <div id="profileBox" class="hidden">
             <div class="profile">
               <img id="profileAvatar" src="" alt="avatar" class="avatar-lg">
@@ -79,9 +82,10 @@
 
         </section>
 
-        <!-- RIGHT: content area -->
+        <!-- RIGHT COLUMN -->
         <section class="right-col">
-          <!-- Dashboard -->
+          
+          <!-- DASHBOARD -->
           <div id="dashboard" class="panel hidden">
             <div class="statsRow">
               <div class="statCard">
@@ -112,7 +116,7 @@
             </div>
           </div>
 
-          <!-- Test chooser -->
+          <!-- TEST CHOOSER -->
           <div id="testChooser" class="panel hidden">
             <h3>Choose Subject & Level</h3>
             <div class="subjectGrid">
@@ -122,18 +126,18 @@
                   <button class="btn small" onclick="startTest('Maths','Intermediate')">Intermediate</button>
                   <button class="btn small" onclick="startTest('Maths','Hard')">Hard</button>
                   <button class="btn small" onclick="startTest('Maths','Easy')">Easy</button>
-
                 </div>
               </div>
+
               <div class="subjectCard">
                 <h4>General Knowledge</h4>
                 <div class="levelBtns">
                   <button class="btn small" onclick="startTest('General Knowledge','Intermediate')">Intermediate</button>
-                 <button class="btn small" onclick="startTest('General Knowledge','Hard')">Hard</button>
-                 <button class="btn small" onclick="startTest('General Knowledge','Easy')">Easy</button>
-                </div>
+                  <button class="btn small" onclick="startTest('General Knowledge','Hard')">Hard</button>
+                  <button class="btn small" onclick="startTest('General Knowledge','Easy')">Easy</button>
                 </div>
               </div>
+
               <div class="subjectCard">
                 <h4>Aptitude</h4>
                 <div class="levelBtns">
@@ -145,13 +149,11 @@
             </div>
           </div>
 
-          <!-- TEST UI -->
+          <!-- TEST PANEL -->
           <div id="testPanel" class="panel hidden">
             <div class="testHeader">
               <h3 id="testTitle">Test</h3>
-              <div class="timer">
-                Time: <span id="timeRemaining">00:00</span>
-              </div>
+              <div class="timer">Time: <span id="timeRemaining">00:00</span></div>
             </div>
 
             <div id="questionBox" class="questionBox"></div>
@@ -163,7 +165,7 @@
             </div>
           </div>
 
-          <!-- result panel -->
+          <!-- RESULT PANEL -->
           <div id="resultPanel" class="panel hidden">
             <h3>Test Result</h3>
             <p id="resultText"></p>
@@ -171,7 +173,7 @@
             <button id="backToDash" class="btn">Back to Dashboard</button>
           </div>
 
-          <!-- history list -->
+          <!-- HISTORY PANEL -->
           <div id="historyPanel" class="panel hidden">
             <h3>Your Attempts</h3>
             <ul id="allHistory"></ul>
@@ -179,15 +181,15 @@
         </section>
       </main>
 
+      <!-- FOOTER -->
       <footer class="card-footer">
         <small>Client-side demo • Use Supabase for persistent storage</small>
       </footer>
+
     </div>
   </div>
 
-  <!-- application JS -->
+  <!-- JS -->
   <script src="pre_sat_apps.js"></script>
 </body>
 </html>
-
-
